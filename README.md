@@ -17,6 +17,70 @@ npm run dev
 
 
 #3.1 TailwindCSS Setup (08:50)
+
+### tailwind 설치
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+![img.png](img.png)
+  
+```typescript
+// globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// tailwind.config.js
+module.exports = {
+    content: [
+        "./pages/**/*.{js,jsx,ts,tsx}",
+        "./components/**/*.{js,jsx,ts,tsx}",
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+};
+
+
+// index.tsx
+import type { NextPage } from "next";
+
+
+const Home: NextPage = () => {
+  return (
+      <div className="bg-red-500">
+        <h1 className="text-black">it works</h1>
+      </div>
+  );
+};
+
+export default Home;
+
+```
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #4 TOUR OF TAILWIND
 
 #4.0 Introduction (11:40)
