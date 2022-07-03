@@ -22,7 +22,7 @@ npm run dev
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
-![img.png](img.png)
+![img.png](./img/img.png)
   
 ```typescript
 // globals.css
@@ -58,32 +58,19 @@ const Home: NextPage = () => {
 export default Home;
 
 ```
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #4 TOUR OF TAILWIND
 
 #4.0 Introduction (11:40)
+
+### www.tailwindcss.com
+
+### Intellij 에서 tailwind css IntelliSense 적용
+* https://plugins.jetbrains.com/plugin/15321-tailwind-css
+* 나 같은 경우는 Intellij IDEA Ultimate 2022.1.3 버젼 업데이트 후
+* plug in [Tailwind CSS] 설치 후 Intellij 재시작하였음
+* 그럼 아래와 같이 IntelliSense 적용이 된다.
+
+ ![img.png](img1.png)
 
 #4.1 Test Drive part One (15:01)
 
