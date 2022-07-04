@@ -298,9 +298,9 @@ mac
 
 # 7.1 Making Forms Alone (14:07)
 
-#7.2 The Register Function (09:39)
-* npm i react-hook-form 
-![img_9.png](img_9.png)
+
+* npm i react-hook-form
+  ![img_9.png](img_9.png)
 
 ```typescript
 import { useState } from "react";
@@ -360,6 +360,47 @@ export default function Forms() {
             <input
                 value={password}
                 onChange={onPasswordChange}
+                type="password"
+                placeholder="Password"
+                required
+            />
+            <input type="submit" value="Create Account" />
+        </form>
+    );
+}
+```
+
+# 7.2 The Register Function (09:39)
+
+![img_10.png](img_10.png)
+
+* react-hook-form 을 사용하여 간단한 코드로 변경 함
+```typescript
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+// Less code (c)
+// Better validation
+// Better Erros (set, clear, display)
+// Have control over inputs
+// Dont deal with events (c)
+// Easier Inputs (c)
+
+export default function Forms() {
+    const { register, watch } = useForm();
+    console.log(watch());
+    return (
+        <form>
+            <input
+                {...register("username")}
+                type="text"
+                placeholder="Username"
+                required
+                minLength={5}
+            />
+            <input {...register("email")} type="email" placeholder="Email" required />
+            <input
+                {...register("password")}
                 type="password"
                 placeholder="Password"
                 required
