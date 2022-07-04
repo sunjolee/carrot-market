@@ -282,6 +282,8 @@ mac
 ![img_6.png](img_6.png)
 
 #6.6 Prisma Client (11:28)
+* npx prisma studio : 데이터베이스 관리자 패널
+* npm i @prisma/client
 
 #6.7 API Routes (07:59)
 
