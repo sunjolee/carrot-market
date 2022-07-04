@@ -163,14 +163,16 @@ export default Home;
 
 #4.12 Just In Time Compiler (11:18)
 
-#4.13 Conclusions (01:09)
-#5 TAILWIND PRACTICE
+# 4.13 Conclusions (01:09)
+# 5 TAILWIND PRACTICE
 
-#5.0 Introduction (03:08)
+# 5.0 Introduction (03:08)
 
-#5.1 Auth part One (11:49)
+# 5.1 Auth part One (11:49)
 
-#5.2 Auth part Two (13:29)
+# 5.2 Auth part Two (13:29)
+
+npm install @tailwindcss/forms
 
 #5.3 Home Screen (10:20)
 
