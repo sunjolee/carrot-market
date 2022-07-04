@@ -675,9 +675,9 @@ export default function Forms() {
 import type { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../components/button";
-import Input from "../components/input";
-import { cls } from "../libs/utils";
+import Button from "@components/button";
+import Input from "@components/input";
+import { cls } from "@libs/utils";
 
 interface EnterForm {
     email?: string;
@@ -886,7 +886,7 @@ export default Enter;
 ```typescript
 // api/users/enter.tsx
 import { NextApiRequest, NextApiResponse } from "next";
-import client from "../../../libs/client";
+import client from "@libs/client";
 
 export default async function handler(
         req: NextApiRequest,
@@ -905,9 +905,9 @@ export default async function handler(
 import type { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../components/button";
-import Input from "../components/input";
-import { cls } from "../libs/utils";
+import Button from "@components/button";
+import Input from "@components/input";
+import { cls } from "@libs/utils";
 
 interface EnterForm {
   email?: string;
@@ -1089,10 +1089,10 @@ export default function useMutation(url: string): UseMutationResult {
 import type { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../components/button";
-import Input from "../components/input";
-import useMutation from "../libs/client/useMutation";
-import { cls } from "../libs/client/utils";
+import Button from "@components/button";
+import Input from "@components/input";
+import useMutation from "@libs/client/useMutation";
+import { cls } from "@libs/client/utils";
 
 interface EnterForm {
   email?: string;
@@ -1145,8 +1145,8 @@ export default function withHandler(
 
 // enter.tsx
 import { NextApiRequest, NextApiResponse } from "next";
-import client from "../../../libs/server/client";
-import withHandler from "../../../libs/server/withHandler";
+import client from "@libs/server/client";
+import withHandler from "@libs/server/withHandler";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log(req.body);
@@ -1158,6 +1158,40 @@ export default withHandler("POST", handler);
 ```
 
 # 8.5 Paths (05:06)
+
+## 경로 설정 (../..) 변경
+
+
+```typescript
+// tsconfig.json
+{
+  "compilerOptions": {
+  "target": "es5",
+          "lib": ["dom", "dom.iterable", "esnext"],
+          "allowJs": true,
+          "skipLibCheck": true,
+          "strict": true,
+          "forceConsistentCasingInFileNames": true,
+          "noEmit": true,
+          "esModuleInterop": true,
+          "module": "esnext",
+          "moduleResolution": "node",
+          "resolveJsonModule": true,
+          "isolatedModules": true,
+          "jsx": "preserve",
+          "incremental": true,
+          "baseUrl": ".",
+          "paths": {
+            "@libs/*": ["libs/*"],
+            "@components/*": ["components/*"]
+  }
+},
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+        "exclude": ["node_modules"]
+}
+
+
+```
 
 
 #9 AUTHENTICATION
