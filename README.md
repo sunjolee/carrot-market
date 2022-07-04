@@ -1120,9 +1120,46 @@ const Enter: NextPage = () => {
 
 
 ```
-#8.4 withHandler (12:58)
+# 8.4 withHandler (12:58)
 
-#8.5 Paths (05:06)
+```typescript
+// withHandler.ts
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default function withHandler(
+        method: "GET" | "POST" | "DELETE",
+        fn: (req: NextApiRequest, res: NextApiResponse) => void
+) {
+  return async function (req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== method) {
+      return res.status(405).end();
+    }
+    try {
+      await fn(req, res);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error });
+    }
+  };
+}
+
+// enter.tsx
+import { NextApiRequest, NextApiResponse } from "next";
+import client from "../../../libs/server/client";
+import withHandler from "../../../libs/server/withHandler";
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log(req.body);
+  return res.status(200).end();
+}
+
+export default withHandler("POST", handler);
+
+```
+
+# 8.5 Paths (05:06)
+
+
 #9 AUTHENTICATION
 
 #9.0 Introduction (04:40)
