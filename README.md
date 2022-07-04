@@ -1044,10 +1044,82 @@ const Enter: NextPage = () => {
 
 ```
 
-#8.2 Clean Code part One (08:49)
+# 8.2 Clean Code part One (08:49)
+# 8.3 Clean Code part Two (07:31)
 
-#8.3 Clean Code part Two (07:31)
+![img_17.png](img_17.png)
 
+```typescript
+// useMutation.tsx
+import { useState } from "react";
+
+interface UseMutationState {
+  loading: boolean;
+  data?: object;
+  error?: object;
+}
+type UseMutationResult = [(data: any) => void, UseMutationState];
+
+export default function useMutation(url: string): UseMutationResult {
+  const [state, setSate] = useState<UseMutationState>({
+    loading: false,
+    data: undefined,
+    error: undefined,
+  });
+  function mutation(data: any) {
+    setSate((prev) => ({ ...prev, loading: true }));
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+            .then((response) => response.json().catch(() => {}))
+            .then((data) => setSate((prev) => ({ ...prev, data })))
+            .catch((error) => setSate((prev) => ({ ...prev, error })))
+            .finally(() => setSate((prev) => ({ ...prev, loading: false })));
+  }
+  return [mutation, { ...state }];
+}
+
+
+// enter.tsx
+
+import type { NextPage } from "next";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Button from "../components/button";
+import Input from "../components/input";
+import useMutation from "../libs/client/useMutation";
+import { cls } from "../libs/client/utils";
+
+interface EnterForm {
+  email?: string;
+  phone?: string;
+}
+
+const Enter: NextPage = () => {
+  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
+  const { register, handleSubmit, reset } = useForm<EnterForm>();
+  const [method, setMethod] = useState<"email" | "phone">("email");
+  const onEmailClick = () => {
+    reset();
+    setMethod("email");
+  };
+  const onPhoneClick = () => {
+    reset();
+    setMethod("phone");
+  };
+  const onValid = (validForm: EnterForm) => {
+    if (loading) return;
+    enter(validForm);
+  };
+  return (
+          ...
+
+
+```
 #8.4 withHandler (12:58)
 
 #8.5 Paths (05:06)
