@@ -213,7 +213,15 @@ npm install @tailwindcss/forms
 
 #6.1 What is Prisma (04:16)
 
-#6.2 Prisma Setup (08:53)
+# 6.2 Prisma Setup (08:53)
+
+## Prisma 설치
+
+npm install prisma -D
+
+npx prisma init
+
+
 
 #6.3 What is PlanetScale (06:55)
 
