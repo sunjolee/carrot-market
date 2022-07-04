@@ -276,6 +276,11 @@ mac
 
 #6.5 Push To PlanetScale (12:19)
 
+* npx prisma db push
+![img_5.png](img_5.png)
+* push 성공
+![img_6.png](img_6.png)
+
 #6.6 Prisma Client (11:28)
 
 #6.7 API Routes (07:59)
