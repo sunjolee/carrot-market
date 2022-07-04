@@ -223,9 +223,56 @@ npx prisma init
 
 
 
-#6.3 What is PlanetScale (06:55)
+# 6.3 What is PlanetScale (06:55)
 
-#6.4 Connecting to PlanetScale (09:19)
+https://app.planetscale.com/ 회원가입 ( git 계정으로 가입 )
+
+# 6.4 Connecting to PlanetScale (09:19)
+
+### 설치
+
+* brew install planetscale/tap/pscale
+
+* 에러 발생
+![img_1.png](img_1.png)
+* xcode 버젼 확인 ( /usr/bin/xcodebuild -version   ) xcode 12.5
+![img_2.png](img_2.png))
+
+* mac 소프트웨어 업데이트 도 안 되고 xcode 업데이트 명령어로도 안 되어서 아래 앱을 업데이트 중
+![img_3.png](img_3.png)
+
+* xcode 업데이트 완료
+![img_4.png](img_4.png)
+
+### 설치 명령어
+# PlanetScale CLI
+
+mac
+    
+    `brew install planetscale/tap/pscale`
+    
+    `brew install mysql-client`
+    
+    `pscale auth login`
+    
+    `pscale region list`
+    
+    `pscale database create carrot-market --region ap-northeast`
+    
+    carrot-market: databse name
+    
+    ap-northeast: region list의 slug 사용
+    
+    admin pannel에서도 동일하게 생성이 가능
+    
+    보안 터널을 통해 PlanetScale과 컴퓨터를 연결할 수 있다
+    
+    `pscale connect carrot-market`
+    
+    pscale 에서 제공하는 URL을 데이터베이스에 연결
+    
+    `DATABASE_URL="mysql://127.0.0.1:3306/carrot-market"`
+
 
 #6.5 Push To PlanetScale (12:19)
 
