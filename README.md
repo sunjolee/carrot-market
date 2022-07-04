@@ -1159,7 +1159,7 @@ export default withHandler("POST", handler);
 
 # 8.5 Paths (05:06)
 
-## 경로 설정 (../..) 변경
+## 경로 설정 (../../libs) --> @libs 로 변경
 
 
 ```typescript
@@ -1194,11 +1194,33 @@ export default withHandler("POST", handler);
 ```
 
 
-#9 AUTHENTICATION
+# 9 AUTHENTICATION
 
-#9.0 Introduction (04:40)
+# 9.0 Introduction (04:40)
 
 #9.1 Accounts Logic (14:35)
+
+* User 신규로 생성하는 방법 (api)
+
+```typescript
+// pages/api/users/enter.tsx
+    const { phone, email } = req.body;
+    const payload = phone ? { phone: +phone } : { email };
+
+    const user = await client.user.upsert({
+        where: {
+            ...payload,
+        },
+        create: {
+            name: "Anonymous",
+            ...payload,
+        },
+        update: {},
+    });
+    console.log(user);
+    return res.status(200).end();
+    
+```
 
 #9.2 Token Logic (15:01)
 
