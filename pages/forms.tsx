@@ -9,10 +9,17 @@ interface LoginForm {
     username: string;
     password: string;
     email: string;
+    errors?: string;
 }
 
 export default function Forms() {
-    const { register, handleSubmit, formState: { errors },  } = useForm<LoginForm>({mode:"onBlur"});
+    const { register, handleSubmit, formState: { errors },
+        watch,
+        setError,
+        setValue,
+        reset,
+        resetField,
+    } = useForm<LoginForm>({mode:"onBlur"});
     const onValid = (data: LoginForm) => {
         console.log("im valid bby");
     };
