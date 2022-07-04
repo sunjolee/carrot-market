@@ -287,14 +287,88 @@ mac
 
 #6.7 API Routes (07:59)
 
-#6.8 Recap (05:30)
-#7 REACT HOOK FORM
+![img_8.png](img_8.png)
 
-#7.0 Introduction (02:50)
+![img_7.png](img_7.png)
 
-#7.1 Making Forms Alone (14:07)
+# 6.8 Recap (05:30)
+# 7 REACT HOOK FORM
+
+# 7.0 Introduction (02:50)
+
+# 7.1 Making Forms Alone (14:07)
 
 #7.2 The Register Function (09:39)
+* npm i react-hook-form 
+![img_9.png](img_9.png)
+
+```typescript
+import { useState } from "react";
+
+export default function Forms() {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [formErrors, setFormErrors] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const onUsernameChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
+        const {
+            currentTarget: { value },
+        } = event;
+        setUsername(value);
+    };
+    const onEmailChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
+        const {
+            currentTarget: { value },
+        } = event;
+        setEmailError("");
+        setEmail(value);
+    };
+    const onPasswordChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
+        const {
+            currentTarget: { value },
+        } = event;
+        setPassword(value);
+    };
+    const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (username === "" || email === "" || password === "") {
+            setFormErrors("All fields are required");
+        }
+        if (!email.includes("@")) {
+            setEmailError("email is required");
+        }
+    };
+    return (
+        <form onSubmit={onSubmit}>
+            <input
+                value={username}
+                onChange={onUsernameChange}
+                type="text"
+                placeholder="Username"
+                required
+                minLength={5}
+            />
+            <input
+                value={email}
+                onChange={onEmailChange}
+                type="email"
+                placeholder="Email"
+                required
+            />
+            {emailError}
+            <input
+                value={password}
+                onChange={onPasswordChange}
+                type="password"
+                placeholder="Password"
+                required
+            />
+            <input type="submit" value="Create Account" />
+        </form>
+    );
+}
+```
 
 #7.3 Validation (08:23)
 
