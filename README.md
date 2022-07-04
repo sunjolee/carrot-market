@@ -5,7 +5,7 @@
 #3 SETUP
 
 #3.0 NextJS Setup (06:23)
-
+દ
 ### 설치
 npx create-next-app@latest --typescript
 
@@ -74,8 +74,75 @@ export default Home;
 
 #4.1 Test Drive part One (15:01)
 
+![img.png](img.png)
+
+```typescript
+// index.tsx
+import type { NextPage } from "next";
+
+const Home: NextPage = () => {
+    return (
+        <div className="bg-slate-400 py-20 px-10 grid gap-10">
+            <div className="bg-white p-6 rounded-3xl shadow-xl">
+                <span className="font-semibold text-3xl">Select Item</span>
+                <div className="flex justify-between my-2">
+                    <span className="text-gray-500">Grey Chair</span>
+                    <span className="font-semibold">$19</span>
+                </div>
+                <div className="flex justify-between">
+                    <span className="text-gray-500">Grey Chair</span>
+                    <span className="font-semibold">$19</span>
+                </div>
+                <div className="flex justify-between mt-2 pt-2 border-t-2 border-dashed">
+                    <span>Total</span>
+                    <span className="font-semibold">$10</span>
+                </div>
+                <div
+                    className="mt-5 bg-blue-500 text-white p-3
+          text-center rounded-xl w-2/4 mx-auto
+         "
+                >
+                    Checkout
+                </div>
+            </div>
+            <div className="bg-white p-10 rounded-2xl shadow-xl"></div>
+            <div className="bg-white p-10 rounded-2xl shadow-xl"></div>
+            <div className="bg-white p-10 rounded-2xl shadow-xl"></div>
+        </div>
+    );
+};
+
+export default Home;
+
+```
+
 #4.2 Test Drive part Two (08:52)
 
+* padding
+  * p-10 : 사방으로 padding 10px 
+  * pr-10 : padding-right
+  * pl-10 : padding-left
+  * pt-10 : padding-top
+  * pb-10 : padding-bottom
+  * px-10 : padding-left, right
+  * py-10 : padding-top, bottom
+  * 단위 ( 반응형은 rem 많이 사용 )
+    * px : 픽셀값
+    * % : 비율
+    * em : ( 요즘 잘 사용 하지 않음 예전에 font 때문에 사용 ) - 자기와 가장 가까운 상위 기준 size에 배수로 계산
+      * ´ font-size : 20px 
+        * 1em : 20px
+        * 1.5em : 30px
+        * 2em : 40px
+        * 0.3em : 6px
+        * 0.75em : 15px -> 15px로 하고 싶을 때 0.75em을 구하는 방법은 15/20 = 0.75가 나온다.
+    * rem :  ( 반응형 웹, 모바일 : root 기준 html 기준으로 em )
+      @media all and (max-width:1000px){
+        html { font-size: 10px }
+      }
+      * 사용처 : 100% rem만 사용하지는 않고 font size, padding 에서 주로 사용 
+     
+ 
 #4.3 Test Drive part Three (13:06)
 
 #4.4 Modifiers (07:20)
