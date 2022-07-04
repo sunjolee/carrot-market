@@ -378,14 +378,11 @@ export default function Forms() {
 ```typescript
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
-// Less code (c)
+ 
 // Better validation
 // Better Erros (set, clear, display)
 // Have control over inputs
-// Dont deal with events (c)
-// Easier Inputs (c)
-
+  
 export default function Forms() {
     const { register, watch } = useForm();
     console.log(watch());
@@ -412,6 +409,48 @@ export default function Forms() {
 ```
 
 #7.3 Validation (08:23)
+
+![img_11.png](img_11.png)
+
+```typescript
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+// Better validation
+// Better Erros (set, clear, display)
+// Have control over inputs
+
+export default function Forms() {
+  const { register, handleSubmit } = useForm();
+  const onValid = () => {
+    console.log("im valid bby");
+  };
+  return (
+          <form onSubmit={handleSubmit(onValid)}>
+                  <input
+                          {...register("username", {
+                              required: true,
+                            })}
+  type="text"
+  placeholder="Username"
+  minLength={5}
+  />
+  <input
+  {...register("email", { required: true })}
+  type="email"
+  placeholder="Email"
+          />
+          <input
+                  {...register("password", { required: true })}
+  type="password"
+  placeholder="Password"
+  />
+  <input type="submit" value="Create Account" />
+          </form>
+);
+}
+```
+
 
 #7.4 Validation part Two (09:16)
 
