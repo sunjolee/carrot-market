@@ -37,6 +37,52 @@ console.log(message);
 
 # 9.7 Serverless Sessions (13:22)
 
+## iron session  : 서명 암호화된 쿠키를 사용하는 Node JS 무상태 세션 도구
+
+* 쿠키 : 유저정보를 암복호화 하여 인증
+* 세션 : 세션ID를 쿠키에 보내 인증 ( 서버에서 세선정보를 관리 해야 함)
+* jwt : 사용자 토큰 정보를 주고 받으며 서버에서는 토큰 정보가 유효한지만 체크
+
+## irow session 도우미 설치
+
+npm i irow-session
+
+ * 호출 api를 withIronSessionApiRoute 로 감싸 주면 client에 내려주는 쿠키정보를 암호화 하여 내려준다.
+```typescript
+import { withIronSessionApiRoute } from "iron-session/next";
+import { NextApiRequest, NextApiResponse } from "next";
+import withHandler, { ResponseType } from "@libs/server/withHandler";
+import client from "@libs/server/client";
+
+async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse<ResponseType>
+) {
+    const { token } = req.body;
+    const exists = await client.token.findUnique({
+        where: {
+            payload: token,
+        },
+    });
+    if (!exists) {
+        res.status(404).end();
+    }
+    else {
+        req.session.user = {
+            id: exists?.userId,
+        };
+        await req.session.save();
+        res.status(200).end();
+    }
+}
+
+export default withIronSessionApiRoute(withHandler("POST", handler), {
+    cookieName: "carrotsession",
+    password:
+        "9845904809485098594385093840598df;slkgjfdl;gkfsdjg;ldfksjgdsflgjdfklgjdflgjflkgjdgd",
+});
+```
+
 # 9.8 Profile Handler (05:18)
 
 # 9.9 Cleaning Code (11:49)
