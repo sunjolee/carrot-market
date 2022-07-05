@@ -229,6 +229,32 @@ https://app.planetscale.com/ 회원가입 ( git 계정으로 가입 )
 
 # 6.4 Connecting to PlanetScale (09:19)
 
+    mac
+    
+    `brew install planetscale/tap/pscale`
+    
+    `brew install mysql-client`
+    
+    `pscale auth login`
+    
+    `pscale region list`
+    
+    `pscale database create carrot-market --region ap-northeast`
+    
+    carrot-market: databse name
+    
+    ap-northeast: region list의 slug 사용
+    
+    admin pannel에서도 동일하게 생성이 가능
+    
+    보안 터널을 통해 PlanetScale과 컴퓨터를 연결할 수 있다
+    
+    `pscale connect carrot-market`
+    
+    pscale 에서 제공하는 URL을 데이터베이스에 연결
+    
+    `DATABASE_URL="mysql://127.0.0.1:3306/carrot-market"`
+
 ### 설치
 
 * brew install planetscale/tap/pscale
@@ -272,6 +298,13 @@ mac
     pscale 에서 제공하는 URL을 데이터베이스에 연결
     
     `DATABASE_URL="mysql://127.0.0.1:3306/carrot-market"`
+
+
+    npx  prisma db push
+
+    npx prisma studio
+
+    npx prisma generate
 
 
 #6.5 Push To PlanetScale (12:19)

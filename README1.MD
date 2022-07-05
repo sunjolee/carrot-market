@@ -128,7 +128,15 @@ export default withIronSessionApiRoute(withHandler("GET", handler), {
 
 # 9.9 Cleaning Code (11:49)
 
+## password 생성 사이트 
+https://passwordsgenerator.net/
+
+
+
 # 9.10 NextAuth (05:50)
+
+## NextAuth는 유저가 로그인 돼 있는지 아닌지를 알려주는 hook이랑 function을 제공
+
 # 10 AUTHORIZATION
 
 # 10.0 Introduction (05:20)
