@@ -143,6 +143,9 @@ https://passwordsgenerator.net/
 
 # 10.1 Protected Handlers (09:05)
 
+## api 호출 시 유저정보가 쿠키에 있어야 하고 & api가 private 한 경우 로그인 하라고 튕겨 내는 로직 추가
+
+
 # 10.2 useUser Hook (10:28)
 
 # 10.3 SWR (12:39)
