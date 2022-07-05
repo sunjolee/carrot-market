@@ -85,6 +85,47 @@ export default withIronSessionApiRoute(withHandler("POST", handler), {
 
 # 9.8 Profile Handler (05:18)
 
+## user id 로 유저 정보 조회
+
+    * req.session.user?.id --> 이곳에 정상 confirm까지 하면 유저 아이디 정보가 실려 온다.
+
+```typescript
+// pages/api/users/me.tsx
+import { withIronSessionApiRoute } from "iron-session/next";
+import { NextApiRequest, NextApiResponse } from "next";
+import withHandler, { ResponseType } from "@libs/server/withHandler";
+import client from "@libs/server/client";
+
+declare module "iron-session" {
+    interface IronSessionData {
+        user?: {
+            id: bigint;
+        };
+    }
+}
+
+async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse<ResponseType>
+) {
+    console.log(req.session.user);
+    const profile = await client.user.findUnique({
+        where: { id: req.session.user?.id },
+    });
+    res.json({
+        ok: true,
+        profile,
+    });
+}
+
+export default withIronSessionApiRoute(withHandler("GET", handler), {
+    cookieName: "carrotsession",
+    password:
+        "9845904809485098594385093840598df;slkgjfdl;gkfsdjg;ldfksjgdsflgjdfklgjdflgjflkgjdgd",
+});
+
+```
+
 # 9.9 Cleaning Code (11:49)
 
 # 9.10 NextAuth (05:50)
