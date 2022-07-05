@@ -29,6 +29,10 @@ console.log(message);
 
 # 9.5 Sending Email (06:56)
 
+## sendgrid.com 회원 가입
+
+* sendgrid 회원 가입 후 로그인이 안 되어 일단 패스 나중에 메일 보낼 일이 있음 해 보자
+
 # 9.6 Token UI (16:22)
 
 # 9.7 Serverless Sessions (13:22)
