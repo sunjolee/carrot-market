@@ -1,17 +1,28 @@
 # carrot-market
 
-npm run dev
 
+
+### pscale 로그인
 pscale auth login
 
+### db 접속
 pscale connect carrot-market
 
+### 1. 모델 변경 정보 DB에 반영 ( 반영 후 클라이언트는 변경 정보가 안 따라주는데....결국 intellij를 다시 시작 하면 됨)
 npx prisma db push
 
+### 2. DB 관리자 접속
 npx prisma studio : 데이터베이스 관리자 패널
 
+### 3. 사이트 실행
+npm run dev
+
+## 변경 된 DB 정보 client에 제너레이팅
 npx prisma generate
 
+
+
+ 
     `brew install planetscale/tap/pscale`
     
     `brew install mysql-client`
