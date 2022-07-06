@@ -85,6 +85,8 @@ npm i swr 설치
 
 # 10.4 useUser Refactor (08:23)
 
+## swr 코드 정리 및 마무리
+
 # 11 PRODUCTS
 
 # 11.0 Product Model (07:30)
