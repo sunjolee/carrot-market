@@ -107,6 +107,24 @@ npm i swr 설치
 
 # 11.8 Bound Mutations (11:18)
 
+Optimistic UI Update
+
+: backend 처리를 기다리지 않고, 잘 처리가 될것을 기대하고 UI를 업데이트 시켜주는 것
+
+```tsx
+const onFavClick = () => {
+// Optimistic UI Update
+if (!data) return;
+/**
+* mutation의 첫번째 arg는 업데이트 될 캐쉬 데이터
+* 두번쨰 인자는 캐쉬 업데이트 후 백엔드에 요청을 통해 검증하는 용도로 default: true
+*/
+mutate({ ...data, isLiked: !data?.isLiked }, false);
+// Backend process
+toggleFav({});
+};
+```
+
 # 11.9 Unbound Mutations (06:37)
 
 # 11.10 Counting Relationships (05:00)
