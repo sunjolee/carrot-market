@@ -1,5 +1,41 @@
 # carrot-market
 
+npm run dev
+
+pscale auth login
+
+pscale connect carrot-market
+
+npx prisma db push
+
+npx prisma studio : 데이터베이스 관리자 패널
+
+npx prisma generate
+
+    `brew install planetscale/tap/pscale`
+    
+    `brew install mysql-client`
+    
+    `pscale auth login`
+    
+    `pscale region list`
+    
+    `pscale database create carrot-market --region ap-northeast`
+    
+    carrot-market: databse name
+    
+    ap-northeast: region list의 slug 사용
+    
+    admin pannel에서도 동일하게 생성이 가능
+    
+    보안 터널을 통해 PlanetScale과 컴퓨터를 연결할 수 있다
+    
+    `pscale connect carrot-market`
+    
+    pscale 에서 제공하는 URL을 데이터베이스에 연결
+    
+    `DATABASE_URL="mysql://127.0.0.1:3306/carrot-market"`
+
 # https://nomadcoders.co/carrot-market 강의에서 발췌 및 참고 하였습니다.
 
 #3 SETUP
@@ -23,41 +59,7 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
 ![img.png](./img/img.png)
-  
-```typescript
-// globals.css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-// tailwind.config.js
-module.exports = {
-    content: [
-        "./pages/**/*.{js,jsx,ts,tsx}",
-        "./components/**/*.{js,jsx,ts,tsx}",
-    ],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
-};
-
-
-// index.tsx
-import type { NextPage } from "next";
-
-
-const Home: NextPage = () => {
-  return (
-      <div className="bg-red-500">
-        <h1 className="text-black">it works</h1>
-      </div>
-  );
-};
-
-export default Home;
-
-```
+   
 #4 TOUR OF TAILWIND
 
 #4.0 Introduction (11:40)
@@ -75,47 +77,7 @@ export default Home;
 #4.1 Test Drive part One (15:01)
 
 ![img.png](img.png)
-
-```typescript
-// index.tsx
-import type { NextPage } from "next";
-
-const Home: NextPage = () => {
-    return (
-        <div className="bg-slate-400 py-20 px-10 grid gap-10">
-            <div className="bg-white p-6 rounded-3xl shadow-xl">
-                <span className="font-semibold text-3xl">Select Item</span>
-                <div className="flex justify-between my-2">
-                    <span className="text-gray-500">Grey Chair</span>
-                    <span className="font-semibold">$19</span>
-                </div>
-                <div className="flex justify-between">
-                    <span className="text-gray-500">Grey Chair</span>
-                    <span className="font-semibold">$19</span>
-                </div>
-                <div className="flex justify-between mt-2 pt-2 border-t-2 border-dashed">
-                    <span>Total</span>
-                    <span className="font-semibold">$10</span>
-                </div>
-                <div
-                    className="mt-5 bg-blue-500 text-white p-3
-          text-center rounded-xl w-2/4 mx-auto
-         "
-                >
-                    Checkout
-                </div>
-            </div>
-            <div className="bg-white p-10 rounded-2xl shadow-xl"></div>
-            <div className="bg-white p-10 rounded-2xl shadow-xl"></div>
-            <div className="bg-white p-10 rounded-2xl shadow-xl"></div>
-        </div>
-    );
-};
-
-export default Home;
-
-```
-
+  
 #4.2 Test Drive part Two (08:52)
 
 * padding
@@ -334,366 +296,30 @@ mac
 
 * npm i react-hook-form
   ![img_9.png](img_9.png)
-
-```typescript
-import { useState } from "react";
-
-export default function Forms() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [formErrors, setFormErrors] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const onUsernameChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        const {
-            currentTarget: { value },
-        } = event;
-        setUsername(value);
-    };
-    const onEmailChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        const {
-            currentTarget: { value },
-        } = event;
-        setEmailError("");
-        setEmail(value);
-    };
-    const onPasswordChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        const {
-            currentTarget: { value },
-        } = event;
-        setPassword(value);
-    };
-    const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (username === "" || email === "" || password === "") {
-            setFormErrors("All fields are required");
-        }
-        if (!email.includes("@")) {
-            setEmailError("email is required");
-        }
-    };
-    return (
-        <form onSubmit={onSubmit}>
-            <input
-                value={username}
-                onChange={onUsernameChange}
-                type="text"
-                placeholder="Username"
-                required
-                minLength={5}
-            />
-            <input
-                value={email}
-                onChange={onEmailChange}
-                type="email"
-                placeholder="Email"
-                required
-            />
-            {emailError}
-            <input
-                value={password}
-                onChange={onPasswordChange}
-                type="password"
-                placeholder="Password"
-                required
-            />
-            <input type="submit" value="Create Account" />
-        </form>
-    );
-}
-```
-
+ 
 # 7.2 The Register Function (09:39)
 
 ![img_10.png](img_10.png)
 
 * react-hook-form 을 사용하여 간단한 코드로 변경 함
-```typescript
-import { useState } from "react";
-import { useForm } from "react-hook-form";
  
-// Better validation
-// Better Erros (set, clear, display)
-// Have control over inputs
-  
-export default function Forms() {
-    const { register, watch } = useForm();
-    console.log(watch());
-    return (
-        <form>
-            <input
-                {...register("username")}
-                type="text"
-                placeholder="Username"
-                required
-                minLength={5}
-            />
-            <input {...register("email")} type="email" placeholder="Email" required />
-            <input
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-                required
-            />
-            <input type="submit" value="Create Account" />
-        </form>
-    );
-}
-```
-
 #7.3 Validation (08:23)
 
 ![img_11.png](img_11.png)
-
-```typescript
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-
-// Better validation
-// Better Erros (set, clear, display)
-// Have control over inputs
-
-export default function Forms() {
-  const { register, handleSubmit } = useForm();
-  const onValid = () => {
-    console.log("im valid bby");
-  };
-  return (
-          <form onSubmit={handleSubmit(onValid)}>
-                  <input
-                          {...register("username", {
-                              required: true,
-                            })}
-  type="text"
-  placeholder="Username"
-  minLength={5}
-  />
-  <input
-  {...register("email", { required: true })}
-  type="email"
-  placeholder="Email"
-          />
-          <input
-                  {...register("password", { required: true })}
-  type="password"
-  placeholder="Password"
-  />
-  <input type="submit" value="Create Account" />
-          </form>
-);
-}
-```
-
+ 
 
 #7.4 Validation part Two (09:16)
 
 ![img_12.png](img_12.png)
-
-```typescript
-import { useState } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
-
-// Better validation
-// Better Erros (set, clear, display)
-// Have control over inputs
-
-interface LoginForm {
-  username: string;
-  password: string;
-  email: string;
-}
-
-export default function Forms() {
-  const { register, handleSubmit } = useForm<LoginForm>();
-  const onValid = (data: LoginForm) => {
-    console.log("im valid bby");
-  };
-  const onInvalid = (errors: FieldErrors) => {
-    console.log(errors);
-  };
-  return (
-          <form onSubmit={handleSubmit(onValid, onInvalid)}>
-                  <input
-                          {...register("username", {
-                              required: "Username is required",
-                              minLength: {
-                                message: "The username should be longer than 5 chars.",
-                                value: 5,
-                              },
-                            })}
-  type="text"
-  placeholder="Username"
-          />
-          <input
-                  {...register("email", { required: "Email is required" })}
-  type="email"
-  placeholder="Email"
-          />
-          <input
-                  {...register("password", { required: "Password is required" })}
-  type="password"
-  placeholder="Password"
-  />
-  <input type="submit" value="Create Account" />
-          </form>
-);
-}
-```
-
+ 
 # 7.5 Errors (11:01)
 
 ![img_13.png](img_13.png)
-```typescript
-import { useState } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
-
-// Better validation
-// Better Erros (set, clear, display)
-// Have control over inputs
-
-interface LoginForm {
-    username: string;
-    password: string;
-    email: string;
-}
-
-export default function Forms() {
-    const { register, handleSubmit, formState: { errors },  } = useForm<LoginForm>({mode:"onBlur"});
-    const onValid = (data: LoginForm) => {
-        console.log("im valid bby");
-    };
-    const onInvalid = (errors: FieldErrors) => {
-        console.log(errors);
-    };
-    console.log(errors);
-    return (
-        <form onSubmit={handleSubmit(onValid, onInvalid)}>
-            <div className={"display:flex;"}>
-                <div>
-                    <input
-                        {...register("username", {
-                            required: "Username is required",
-                            minLength: {
-                                message: "The username should be longer than 5 chars.",
-                                value: 5,
-                            },
-                        })}
-                        type="text"
-                        placeholder="Username"
-                    />
-                    <span className={"text-fuchsia-900"}>{errors.username?.message}</span>
-                </div>
-                <div>
-                    <input
-                        {...register("email", {
-                            required: "Email is required",
-                            validate: {
-                                notGmail: (value) => !value.includes("@gmail.com") || "Gmail is not allowed",
-                            }
-                        })}
-                        type="email"
-                        placeholder="Email"
-                    />
-                    <span className={"text-fuchsia-900"}>{errors.email?.message}</span>
-                </div>
-                <div>
-                    <input
-                        {...register("password", { required: "Password is required" })}
-                        type="password"
-                        placeholder="Password"
-                    />
-                    <span className={"text-fuchsia-900"}>{errors.password?.message}</span>
-                </div>
-                <div>
-                    <input type="submit" value="Create Account" />
-                </div>
-            </div>
-        </form>
-    );
-}
-```
-
+ 
 # 7.6 Extras (07:27)
 
 ![img_14.png](img_14.png)
-
-```typescript
-import { useState } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
-
-// Better validation
-// Better Erros (set, clear, display)
-// Have control over inputs
-
-interface LoginForm {
-    username: string;
-    password: string;
-    email: string;
-    errors?: string;
-}
-
-export default function Forms() {
-    const { register, handleSubmit, formState: { errors },
-        watch,
-        setError,
-        setValue,
-        reset,
-        resetField,
-    } = useForm<LoginForm>({mode:"onBlur"});
-    const onValid = (data: LoginForm) => {
-        console.log("im valid bby");
-    };
-    const onInvalid = (errors: FieldErrors) => {
-        console.log(errors);
-    };
-    console.log(errors);
-    return (
-        <form onSubmit={handleSubmit(onValid, onInvalid)}>
-            <div className={"display:flex;"}>
-                <div>
-                    <input
-                        {...register("username", {
-                            required: "Username is required",
-                            minLength: {
-                                message: "The username should be longer than 5 chars.",
-                                value: 5,
-                            },
-                        })}
-                        type="text"
-                        placeholder="Username"
-                    />
-                    <span className={"text-fuchsia-900"}>{errors.username?.message}</span>
-                </div>
-                <div>
-                    <input
-                        {...register("email", {
-                            required: "Email is required",
-                            validate: {
-                                notGmail: (value) => !value.includes("@gmail.com") || "Gmail is not allowed",
-                            }
-                        })}
-                        type="email"
-                        placeholder="Email"
-                    />
-                    <span className={"text-fuchsia-900"}>{errors.email?.message}</span>
-                </div>
-                <div>
-                    <input
-                        {...register("password", { required: "Password is required" })}
-                        type="password"
-                        placeholder="Password"
-                    />
-                    <span className={"text-fuchsia-900"}>{errors.password?.message}</span>
-                </div>
-                <div>
-                    <input type="submit" value="Create Account" />
-                </div>
-            </div>
-        </form>
-    );
-}
-```
-
+ 
 
 ### https://react-hook-form.com/api/useform/formstate 사이트 참고하여 사용
 
@@ -702,530 +328,22 @@ export default function Forms() {
 # 8.0 Enter Form (08:40)
 
 ![img_15.png](img_15.png)
-
-```typescript
-// enter.tsx
-import type { NextPage } from "next";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Button from "@components/button";
-import Input from "@components/input";
-import { cls } from "@libs/utils";
-
-interface EnterForm {
-    email?: string;
-    phone?: string;
-}
-
-const Enter: NextPage = () => {
-    const { register, handleSubmit, reset } = useForm<EnterForm>();
-    const [method, setMethod] = useState<"email" | "phone">("email");
-    const onEmailClick = () => {
-        reset();
-        setMethod("email");
-    };
-    const onPhoneClick = () => {
-        reset();
-        setMethod("phone");
-    };
-    const onValid = (data: EnterForm) => {
-        console.log(data);
-    };
-    return (
-        <div className="mt-16 px-4">
-            <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
-            <div className="mt-12">
-                <div className="flex flex-col items-center">
-                    <h5 className="text-sm text-gray-500 font-medium">Enter using:</h5>
-                    <div className="grid  border-b  w-full mt-8 grid-cols-2 ">
-                        <button
-                            className={cls(
-                                "pb-4 font-medium text-sm border-b-2",
-                                method === "email"
-                                    ? " border-orange-500 text-orange-400"
-                                    : "border-transparent hover:text-gray-400 text-gray-500"
-                            )}
-                            onClick={onEmailClick}
-                        >
-                            Email
-                        </button>
-                        <button
-                            className={cls(
-                                "pb-4 font-medium text-sm border-b-2",
-                                method === "phone"
-                                    ? " border-orange-500 text-orange-400"
-                                    : "border-transparent hover:text-gray-400 text-gray-500"
-                            )}
-                            onClick={onPhoneClick}
-                        >
-                            Phone
-                        </button>
-                    </div>
-                </div>
-                <form
-                    onSubmit={handleSubmit(onValid)}
-                    className="flex flex-col mt-8 space-y-4"
-                >
-                    {method === "email" ? (
-                        <Input
-                            register={register("email", {
-                                required: true,
-                            })}
-                            name="email"
-                            label="Email address"
-                            type="email"
-                            required
-                        />
-                    ) : null}
-                    {method === "phone" ? (
-                        <Input
-                            register={register("phone")}
-                            name="phone"
-                            label="Phone number"
-                            type="number"
-                            kind="phone"
-                            required
-                        />
-                    ) : null}
-                    {method === "email" ? <Button text={"Get login link"} /> : null}
-                    {method === "phone" ? (
-                        <Button text={"Get one-time password"} />
-                    ) : null}
-                </form>
-
-                <div className="mt-8">
-                    <div className="relative">
-                        <div className="absolute w-full border-t border-gray-300" />
-                        <div className="relative -top-3 text-center ">
-              <span className="bg-white px-2 text-sm text-gray-500">
-                Or enter with
-              </span>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 mt-2 gap-3">
-                        <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <svg
-                                className="w-5 h-5"
-                                aria-hidden="true"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-                            </svg>
-                        </button>
-                        <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <svg
-                                className="w-5 h-5"
-                                aria-hidden="true"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-export default Enter;
-
-// input.tsx
-  import type { UseFormRegisterReturn } from "react-hook-form";
-
-  interface InputProps {
-    label: string;
-    name: string;
-    kind?: "text" | "phone" | "price";
-    type: string;
-    register: UseFormRegisterReturn;
-    required: boolean;
-  }
-
-  export default function Input({
-                                  label,
-                                  name,
-                                  kind = "text",
-                                  register,
-                                  type,
-                                  required,
-                                }: InputProps) {
-    return (
-            <div>
-                    <label
-                            className="mb-1 block text-sm font-medium text-gray-700"
-    htmlFor={name}
-            >
-            {label}
-            </label>
-    {kind === "text" ? (
-                    <div className="rounded-md relative flex  items-center shadow-sm">
-                    <input
-                            id={name}
-            required={required}
-      {...register}
-      type={type}
-      className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-              />
-              </div>
-    ) : null}
-    {kind === "price" ? (
-                    <div className="rounded-md relative flex  items-center shadow-sm">
-                    <div className="absolute left-0 pointer-events-none pl-3 flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">$</span>
-                            </div>
-                            <input
-            id={name}
-      required={required}
-      {...register}
-      type={type}
-      className="appearance-none pl-7 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-      />
-      <div className="absolute right-0 pointer-events-none pr-3 flex items-center">
-      <span className="text-gray-500">KRW</span>
-              </div>
-              </div>
-    ) : null}
-    {kind === "phone" ? (
-                    <div className="flex rounded-md shadow-sm">
-                    <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm">
-                            +82
-                            </span>
-                            <input
-            id={name}
-      required={required}
-      {...register}
-      type={type}
-      className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-              />
-              </div>
-    ) : null}
-    </div>
-  );
-  }
-
-
-```
-
+ 
 # 8.1 Form Submission (08:24)
 
 ![img_16.png](img_16.png)
-
-```typescript
-// api/users/enter.tsx
-import { NextApiRequest, NextApiResponse } from "next";
-import client from "@libs/client";
-
-export default async function handler(
-        req: NextApiRequest,
-        res: NextApiResponse
-) {
-  if (req.method !== "POST") {
-    res.status(401).end();
-  }
-  console.log(req.body.email);
-  console.log(req.body.phone);
-  res.status(200).end();
-}
-
-
-// enter.tsx
-import type { NextPage } from "next";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Button from "@components/button";
-import Input from "@components/input";
-import { cls } from "@libs/utils";
-
-interface EnterForm {
-  email?: string;
-  phone?: string;
-}
-
-const Enter: NextPage = () => {
-  const [submitting, setSubmitting] = useState(false);
-  const { register, handleSubmit, reset } = useForm<EnterForm>();
-  const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => {
-    reset();
-    setMethod("email");
-  };
-  const onPhoneClick = () => {
-    reset();
-    setMethod("phone");
-  };
-  const onValid = (data: EnterForm) => {
-    setSubmitting(true);
-    fetch("/api/users/enter", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
-      setSubmitting(false);
-    })
-  };
-  return (
-          <div className="mt-16 px-4">
-          <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
-  <div className="mt-12">
-  <div className="flex flex-col items-center">
-  <h5 className="text-sm text-gray-500 font-medium">Enter using:</h5>
-  <div className="grid border-b  w-full mt-8 grid-cols-2 ">
-  <button
-          className={cls(
-    "pb-4 font-medium text-sm border-b-2",
-    method === "email"
-          ? " border-orange-500 text-orange-400"
-          : "border-transparent hover:text-gray-400 text-gray-500"
-)}
-  onClick={onEmailClick}
-          >
-          Email
-          </button>
-          <button
-  className={cls(
-    "pb-4 font-medium text-sm border-b-2",
-    method === "phone"
-          ? " border-orange-500 text-orange-400"
-          : "border-transparent hover:text-gray-400 text-gray-500"
-)}
-  onClick={onPhoneClick}
-          >
-          Phone
-          </button>
-          </div>
-          </div>
-          <form
-  onSubmit={handleSubmit(onValid)}
-  className="flex flex-col mt-8 space-y-4"
-  >
-  {method === "email" ? (
-          <Input
-                  register={register("email", {
-    required: true,
-  })}
-  name="email"
-  label="Email address"
-  type="email"
-  required
-  />
-) : null}
-  {method === "phone" ? (
-          <Input
-                  register={register("phone")}
-    name="phone"
-    label="Phone number"
-    type="number"
-    kind="phone"
-    required
-    />
-  ) : null}
-  {method === "email" ? <Button text={"Get login link"} /> : null}
-    {method === "phone" ? (
-            <Button text={submitting ? "Loading" : "Get one-time password"} />
-    ) : null}
-    </form>
-
-    <div className="mt-8">
-  <div className="relative">
-  <div className="absolute w-full border-t border-gray-300" />
-  <div className="relative -top-3 text-center ">
-  <span className="bg-white px-2 text-sm text-gray-500">
-          Or enter with
-  </span>
-  </div>
-  </div>
-  <div className="grid grid-cols-2 mt-2 gap-3">
-    <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-    <svg
-            className="w-5 h-5"
-    aria-hidden="true"
-    fill="currentColor"
-    viewBox="0 0 20 20"
-    >
-    <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-            </svg>
-            </button>
-            <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-  <svg
-          className="w-5 h-5"
-    aria-hidden="true"
-    fill="currentColor"
-    viewBox="0 0 20 20"
-    >
-    <path
-            fillRule="evenodd"
-    d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-    clipRule="evenodd"
-            />
-            </svg>
-            </button>
-            </div>
-            </div>
-            </div>
-            </div>
-  );
-  };
-  export default Enter;
-
-```
-
+ 
 # 8.2 Clean Code part One (08:49)
 # 8.3 Clean Code part Two (07:31)
 
 ![img_17.png](img_17.png)
-
-```typescript
-// useMutation.tsx
-import { useState } from "react";
-
-interface UseMutationState {
-  loading: boolean;
-  data?: object;
-  error?: object;
-}
-type UseMutationResult = [(data: any) => void, UseMutationState];
-
-export default function useMutation(url: string): UseMutationResult {
-  const [state, setSate] = useState<UseMutationState>({
-    loading: false,
-    data: undefined,
-    error: undefined,
-  });
-  function mutation(data: any) {
-    setSate((prev) => ({ ...prev, loading: true }));
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-            .then((response) => response.json().catch(() => {}))
-            .then((data) => setSate((prev) => ({ ...prev, data })))
-            .catch((error) => setSate((prev) => ({ ...prev, error })))
-            .finally(() => setSate((prev) => ({ ...prev, loading: false })));
-  }
-  return [mutation, { ...state }];
-}
-
-
-// enter.tsx
-
-import type { NextPage } from "next";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Button from "@components/button";
-import Input from "@components/input";
-import useMutation from "@libs/client/useMutation";
-import { cls } from "@libs/client/utils";
-
-interface EnterForm {
-  email?: string;
-  phone?: string;
-}
-
-const Enter: NextPage = () => {
-  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
-  const { register, handleSubmit, reset } = useForm<EnterForm>();
-  const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => {
-    reset();
-    setMethod("email");
-  };
-  const onPhoneClick = () => {
-    reset();
-    setMethod("phone");
-  };
-  const onValid = (validForm: EnterForm) => {
-    if (loading) return;
-    enter(validForm);
-  };
-  return (
-          ...
-
-
-```
+ 
 # 8.4 withHandler (12:58)
-
-```typescript
-// withHandler.ts
-import { NextApiRequest, NextApiResponse } from "next";
-
-export default function withHandler(
-        method: "GET" | "POST" | "DELETE",
-        fn: (req: NextApiRequest, res: NextApiResponse) => void
-) {
-  return async function (req: NextApiRequest, res: NextApiResponse) {
-    if (req.method !== method) {
-      return res.status(405).end();
-    }
-    try {
-      await fn(req, res);
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error });
-    }
-  };
-}
-
-// enter.tsx
-import { NextApiRequest, NextApiResponse } from "next";
-import client from "@libs/server/client";
-import withHandler from "@libs/server/withHandler";
-
-async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(req.body);
-  return res.status(200).end();
-}
-
-export default withHandler("POST", handler);
-
-```
-
+ 
 # 8.5 Paths (05:06)
 
 ## 경로 설정 (../../libs) --> @libs 로 변경
-
-
-```typescript
-// tsconfig.json
-{
-  "compilerOptions": {
-  "target": "es5",
-          "lib": ["dom", "dom.iterable", "esnext"],
-          "allowJs": true,
-          "skipLibCheck": true,
-          "strict": true,
-          "forceConsistentCasingInFileNames": true,
-          "noEmit": true,
-          "esModuleInterop": true,
-          "module": "esnext",
-          "moduleResolution": "node",
-          "resolveJsonModule": true,
-          "isolatedModules": true,
-          "jsx": "preserve",
-          "incremental": true,
-          "baseUrl": ".",
-          "paths": {
-            "@libs/*": ["libs/*"],
-            "@components/*": ["components/*"]
-  }
-},
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-        "exclude": ["node_modules"]
-}
-
-
-```
-
+ 
 
 # 9 AUTHENTICATION
 
@@ -1234,53 +352,11 @@ export default withHandler("POST", handler);
 #9.1 Accounts Logic (14:35)
 
 * User 신규로 생성하는 방법 (api)
-
-```typescript
-// pages/api/users/enter.tsx
-    const { phone, email } = req.body;
-    const payload = phone ? { phone: +phone } : { email };
-
-    const user = await client.user.upsert({
-        where: {
-            ...payload,
-        },
-        create: {
-            name: "Anonymous",
-            ...payload,
-        },
-        update: {},
-    });
-    console.log(user);
-    return res.status(200).end();
-    
-```
-
+ 
 # 9.2 Token Logic (15:01)
 
 * token 모델 정보 추가
-
-```typescript
-model User {
-  id        Int      @id @default(autoincrement())
-  phone     Int?     @unique
-  email     String?  @unique
-  name      String
-  avatar    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  tokens    Token[]
-}
-
-model Token {
-  id        Int      @id @default(autoincrement())
-  payload   String   @unique
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int      
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-```
+ 
 * prisma 에 변경된 모델 정보 push
 
   npx  prisma db push
@@ -1302,42 +378,9 @@ model Token {
   npx prisma generate
   
   ![img_20.png](img_20.png)
-
-```typescript
-const { PrismaClient } = require('@prisma/client');
-const client = new PrismaClient() ;
-const token = await client.token.create({
-```
-
+ 
   * connectOrCreate란?
     - 관련 레코드(데이터)가 존재하거나 존재하지 않거나 유무를 판단하여 존재 하지 않다면 해당 데이터를 삽입하는 것입니다.
-    ```typescript
-    import { NextApiRequest, NextApiResponse } from "next";
-    import withHandler from "@libs/server/withHandler";
-    const { PrismaClient } = require('@prisma/client')
     
-    async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { phone, email } = req.body;
-    const user = phone ? { phone: +phone } : { email };
-    const payload = Math.floor(100000 + Math.random() * 900000) + "";
-    const client = new PrismaClient() ;
-    const token = await client.token.create({
-    data: {
-    payload,
-    user: {
-    connectOrCreate: {
-    where: {
-    ...user,
-    },
-    create: {
-    name: "Anonymous",
-    ...user,
-    },
-    },
-    },
-    },
-    });
-    console.log(token);
-```
  
   

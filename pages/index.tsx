@@ -6,6 +6,7 @@ import useUser from "@libs/client/useUser";
 import Head from "next/head";
 
 const Home: NextPage = () => {
+    // const { user, isLoading } = useUser();
     const user = useUser();
     console.log(user);
     return (

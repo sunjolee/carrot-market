@@ -13,20 +13,7 @@ TWILIO_SID=
 TWILIO_TOKEN=
 TWILIO_MSID=
 MY_PHONE=
-
-```typescript
-import twilio from "twilio";
-const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
-
-const message = await twilioClient.messages.create({
-    messagingServiceSid: process.env.TWILIO_MSID,
-    to: process.env.MY_PHONE!,
-    body: `Your login token is ${payload}.`,
-});
-console.log(message);
-
-```
-
+ 
 # 9.5 Sending Email (06:56)
 
 ## sendgrid.com 회원 가입
@@ -48,84 +35,13 @@ console.log(message);
 npm i irow-session
 
  * 호출 api를 withIronSessionApiRoute 로 감싸 주면 client에 내려주는 쿠키정보를 암호화 하여 내려준다.
-```typescript
-import { withIronSessionApiRoute } from "iron-session/next";
-import { NextApiRequest, NextApiResponse } from "next";
-import withHandler, { ResponseType } from "@libs/server/withHandler";
-import client from "@libs/server/client";
-
-async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<ResponseType>
-) {
-    const { token } = req.body;
-    const exists = await client.token.findUnique({
-        where: {
-            payload: token,
-        },
-    });
-    if (!exists) {
-        res.status(404).end();
-    }
-    else {
-        req.session.user = {
-            id: exists?.userId,
-        };
-        await req.session.save();
-        res.status(200).end();
-    }
-}
-
-export default withIronSessionApiRoute(withHandler("POST", handler), {
-    cookieName: "carrotsession",
-    password:
-        "9845904809485098594385093840598df;slkgjfdl;gkfsdjg;ldfksjgdsflgjdfklgjdflgjflkgjdgd",
-});
-```
-
+ 
 # 9.8 Profile Handler (05:18)
 
 ## user id 로 유저 정보 조회
 
     * req.session.user?.id --> 이곳에 정상 confirm까지 하면 유저 아이디 정보가 실려 온다.
-
-```typescript
-// pages/api/users/me.tsx
-import { withIronSessionApiRoute } from "iron-session/next";
-import { NextApiRequest, NextApiResponse } from "next";
-import withHandler, { ResponseType } from "@libs/server/withHandler";
-import client from "@libs/server/client";
-
-declare module "iron-session" {
-    interface IronSessionData {
-        user?: {
-            id: bigint;
-        };
-    }
-}
-
-async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<ResponseType>
-) {
-    console.log(req.session.user);
-    const profile = await client.user.findUnique({
-        where: { id: req.session.user?.id },
-    });
-    res.json({
-        ok: true,
-        profile,
-    });
-}
-
-export default withIronSessionApiRoute(withHandler("GET", handler), {
-    cookieName: "carrotsession",
-    password:
-        "9845904809485098594385093840598df;slkgjfdl;gkfsdjg;ldfksjgdsflgjdfklgjdflgjflkgjdgd",
-});
-
-```
-
+ 
 # 9.9 Cleaning Code (11:49)
 
 ## password 생성 사이트 
@@ -154,6 +70,18 @@ https://passwordsgenerator.net/
   * router.replace("/"); // 브라우저에게 홈 화면 히스토리를 기록하지 말라고 한다,
 
 # 10.3 SWR (12:39)
+
+## swr ( stale while revalidate ) : http 캐시 무효화 전략
+: 페이지에 접근하 swr이 로그인 정보를 불러오 api 응답이 되면 로그인 정보를 캐시에 저장 
+  --> 다른 페이지 이동 후 다시 돌아 오면 swr 이 전에 받은 데이터를 보여 줄거고
+  아무도 모르게 api에 새로운 데이터가 있는지 확인 한다. 
+  swr이 api에 요청을 보내고 새로운 데이터가 있으면 업데이트 해준다. 
+  그래서 항상 최신 데이터를 확인 할 수 있고, 페이지를 이동할 때 마다 로딩 표시를 볼 필요가 없다
+
+npm i swr 설치
+
+ * swr은 url(key)를 기준으로 기억했다가 해당 url를 호출하면 캐시에서 데이터를 가져 온다.
+
 
 # 10.4 useUser Refactor (08:23)
 
