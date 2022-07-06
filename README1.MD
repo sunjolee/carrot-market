@@ -145,12 +145,18 @@ https://passwordsgenerator.net/
 
 ## api 호출 시 유저정보가 쿠키에 있어야 하고 & api가 private 한 경우 로그인 하라고 튕겨 내는 로직 추가
 
-
 # 10.2 useUser Hook (10:28)
+
+## 유저 정보 가져오는 라이브러리 추가
+
+## router push replace 차이
+  * router.push("/");    // 브라우저에게 홈 화면 히스토리를 기록하며 간다.
+  * router.replace("/"); // 브라우저에게 홈 화면 히스토리를 기록하지 말라고 한다,
 
 # 10.3 SWR (12:39)
 
 # 10.4 useUser Refactor (08:23)
+
 # 11 PRODUCTS
 
 # 11.0 Product Model (07:30)
