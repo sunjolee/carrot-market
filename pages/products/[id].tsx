@@ -29,9 +29,18 @@ const ItemDetail: NextPage = () => {
     const [toggleFav] = useMutation(`/api/products/${router.query.id}/fav`);
     const onFavClick = () => {
         if (!data) return;
-        boundMutate((prev) => prev && { ...prev, isLiked: !prev.isLiked }, false);
+
+        // 1 : 화면 먼저 값을 변경
+        boundMutate((prev) => prev && { ...prev, isLiked: !prev.isLiked }, true);
+
+        // 2 : 다른 캐시의 내용도 바꿀 수 있다. --> 아래 와 같이 하면 유저 정보 상태가 ok 아니므로 로그인 페이지로 가게 된다.
         // mutate("/api/users/me", (prev: any) => ({ ok: !prev.ok }), false);
+
+        // 3 : 실제 DB에 값을 바꾼다.. ( 왜 느리지? )
         toggleFav({});
+
+        // ?? 1번을 안 하고 3번 후 리프레쉬는 안 되나? --> 느려서 이렇게 한 걸끼?
+
     };
     return (
         <Layout canGoBack>
