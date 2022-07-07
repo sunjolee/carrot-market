@@ -11,6 +11,7 @@ async function handler(
         query: { id },
         session: { user },
     } = req;
+
     const post = await client.post.findUnique({
         where: {
             id: +id!,
@@ -27,6 +28,7 @@ async function handler(
                 select: {
                     answer: true,
                     id: true,
+                    createdAt: true,
                     user: {
                         select: {
                             id: true,
