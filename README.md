@@ -21,8 +21,7 @@ npm run dev
 npx prisma generate
 
 ### 3. DB 관리자 접속
-npx prisma studio : 데이터베이스 관리자 패널
-
+npx prisma studio 
 
   
     `brew install planetscale/tap/pscale`
