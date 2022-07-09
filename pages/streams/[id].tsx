@@ -31,7 +31,7 @@ interface MessageForm {
     message: string;
 }
 
-const Stream: NextPage = () => {
+const Stream1: NextPage = () => {
     const { user } = useUser();
     const router = useRouter();
     const { register, handleSubmit, reset } = useForm<MessageForm>();
@@ -70,13 +70,15 @@ const Stream: NextPage = () => {
         );
         sendMessage(form);
     };
+
+    console.log(data);
     return (
         <Layout canGoBack>
             <div className="py-10 px-4  space-y-4">
-                {data?.stream.cloudflareId ? (
+                {data?.stream?.cloudflareId ? (
                     <iframe
                         className="w-full aspect-video  rounded-md shadow-sm"
-                        src={`https://iframe.videodelivery.net/${data?.stream.cloudflareId}`}
+                        src={`https://iframe.videodelivery.net/${data?.stream?.cloudflareId}`}
                         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
                         allowFullScreen={true}
                     ></iframe>
@@ -94,18 +96,18 @@ const Stream: NextPage = () => {
                         <span>Stream Keys (secret)</span>
                         <span className="text-white">
               <span className="font-medium text-gray-800">URL:</span>{" "}
-                            {data?.stream.cloudflareUrl}
+                            {data?.stream?.cloudflareUrl}
             </span>
                         <span className="text-white">
               <span className="font-medium text-gray-800">Key:</span>{" "}
-                            {data?.stream.cloudflareKey}
+                            {data?.stream?.cloudflareKey}
             </span>
                     </div>
                 </div>
                 <div>
                     <h2 className="text-2xl font-bold text-gray-900">Live Chat</h2>
                     <div className="py-10 pb-16 h-[50vh] overflow-y-scroll  px-4 space-y-4">
-                        {data?.stream.messages.map((message) => (
+                        {data?.stream?.messages.map((message) => (
                             <Message
                                 key={message.id}
                                 message={message.message}
@@ -136,4 +138,4 @@ const Stream: NextPage = () => {
     );
 };
 
-export default Stream;
+export default Stream1;

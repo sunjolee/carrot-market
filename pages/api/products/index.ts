@@ -27,12 +27,15 @@ async function handler(
             body: { name, price, description, photoId },
             session: { user },
         } = req;
+
+
         const product = await client.product.create({
             data: {
                 name,
                 price: +price,
                 description,
-                image: photoId,
+                // image: photoId,
+                image: "",
                 user: {
                     connect: {
                         id: user?.id,

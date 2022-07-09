@@ -1,27 +1,34 @@
 # carrot-market
 
+---
 
-
-### pscale 로그인
+### 0 pscale 로그인
 pscale auth login
 
-### 0. db 접속
+### 1. db 접속
 pscale connect carrot-market
 
-### 1. 모델 변경 정보 DB에 반영 ( 반영 후 클라이언트는 변경 정보가 안 따라주는데....결국 intellij를 다시 시작 하면 됨)
+### 2. 사이트 재실행 - 가장 최신 버젼의 클라이언트를 실행 한다.
+npm run dev
+
+### 3. DB 관리자 접속
+npx prisma studio
+
+---
+
+
+### 모델 변경 정보 DB에 반영 ( 반영 후 클라이언트는 변경 정보가 안 따라주는데....결국 intellij를 다시 시작 하면 됨)
 npx prisma db push
 
 ### 1.0 왜? 소스에서 추가 된 모델 정보가 자동으로 안 보이지??
 ### 1.1 그냥 인텔리 제이를 다시 열자... 다른 방법이 있나? 
 
-### 2. 사이트 재실행 - 가장 최신 버젼의 클라이언트를 실행 한다.
-npm run dev 
 
-## 3. (혹시 안되면 ? 다시 ) 변경 된 DB 정보 client에 제너레이팅
+
+## (혹시 안되면 ? 다시 ) 변경 된 DB 정보 client에 제너레이팅
 npx prisma generate
 
-### 3. DB 관리자 접속
-npx prisma studio 
+
 
   
     `brew install planetscale/tap/pscale`
