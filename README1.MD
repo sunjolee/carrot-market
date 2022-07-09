@@ -176,6 +176,8 @@ toggleFav({});
 # 14.4 Mutations and Refresh (08:21)
 
 # 14.5 Seeding (06:20)
+  ## seeding 은 기본적으로 데이터베이스에 가짜 데이터를 엄청 빨리 생성해
+  ## 명령어 :  npx prisma db seed
 
 # 14.6 Pagination (11:14)
 # 15 CLOUDFLARE IMAGES
