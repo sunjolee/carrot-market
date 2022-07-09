@@ -8,39 +8,52 @@ async function handler(
     res: NextApiResponse<ResponseType>
 ) {
     const {
-        query: { id },
         session: { user },
+        body: { name, price, description },
     } = req;
-    const stream = await client.stream.findUnique({
-        where: {
-            id: +id.toString(),
-        },
-        include: {
-            messages: {
-                select: {
-                    id: true,
-                    message: true,
-                    user: {
-                        select: {
-                            avatar: true,
-                            id: true,
-                        },
+    if (req.method === "POST") {
+        const {
+            result: {
+                uid,
+                rtmps: { streamKey, url },
+            },
+        } = await (
+            await fetch(
+                `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ID}/stream/live_inputs`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${process.env.CF_STREAM_TOKEN}`,
+                    },
+                    body: `{"meta": {"name":"${name}"},"recording": { "mode": "automatic", "timeoutSeconds": 10}}`,
+                }
+            )
+        ).json();
+        const stream = await client.stream.create({
+            data: {
+                cloudflareId: uid,
+                cloudflareKey: streamKey,
+                cloudflareUrl: url,
+                name,
+                price,
+                description,
+                user: {
+                    connect: {
+                        id: user?.id,
                     },
                 },
             },
-        },
-    });
-    const isOwner = stream?.userId === user?.id;
-    if (stream && !isOwner) {
-        stream.cloudflareKey = "xxxxx";
-        stream.cloudflareUrl = "xxxxx";
+        });
+        res.json({ ok: true, stream });
+    } else if (req.method === "GET") {
+        const streams = await client.stream.findMany({});
+        res.json({ ok: true, streams });
     }
-    res.json({ ok: true, stream });
 }
 
 export default withApiSession(
     withHandler({
-        methods: ["GET"],
+        methods: ["GET", "POST"],
         handler,
     })
 );
