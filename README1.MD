@@ -184,6 +184,9 @@ toggleFav({});
 
 # 15.0 Introduction (03:29)
 
+## Cloudflare Images 활용
+
+
 # 15.1 Image Preview (11:13)
 
 # 15.2 Direct Creator Uploads (10:57)
