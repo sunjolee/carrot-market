@@ -237,6 +237,11 @@ toggleFav({});
 
 # 19.2 Dynamic Imports (11:04)
 
+## 페이지에서 어떤 액션에 의하여 컴포넌트가 호출 되는 경우
+## 보통은 로딩시에 이미 컴포넌트를 읽어 온다.
+## 하지만 Dynamic Imports 를 사용하면 액션이 일어 났을 때 해당 컴포넌트를 읽어 낸다.
+## Lazy Loading
+
 # 19.3 Lazy-load Imports (08:44)
 
 # 19.4 _document and Fonts (12:14)
