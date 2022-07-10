@@ -11,24 +11,13 @@ async function handler(
         query: { id },
         session: { user },
     } = req;
-
-    const post = await client.post.findUnique({
-        where: {
-            id: +id!,
-        },
-        include: {
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    avatar: true,
+    client.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(
+        async () => {
+            const post = await client.post.findUnique({
+                where: {
+                    id: +id!,
                 },
-            },
-            answers: {
-                select: {
-                    answer: true,
-                    id: true,
-                    createdAt: true,
+                include: {
                     user: {
                         select: {
                             id: true,
@@ -36,34 +25,47 @@ async function handler(
                             avatar: true,
                         },
                     },
+                    answers: {
+                        select: {
+                            answer: true,
+                            id: true,
+                            user: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    avatar: true,
+                                },
+                            },
+                        },
+                        take: 10,
+                        skip: 20,
+                    },
+                    _count: {
+                        select: {
+                            answers: true,
+                            wondering: true,
+                        },
+                    },
                 },
-                take: 10,
-                skip: 0,
-            },
-            _count: {
-                select: {
-                    answers: true,
-                    wondering: true,
-                },
-            },
-        },
-    });
-    const isWondering = Boolean(
-        await client.wondering.findFirst({
-            where: {
-                postId: +id!,
-                userId: user?.id,
-            },
-            select: {
-                id: true,
-            },
-        })
+            });
+            const isWondering = Boolean(
+                await client.wondering.findFirst({
+                    where: {
+                        postId: +id!,
+                        userId: user?.id,
+                    },
+                    select: {
+                        id: true,
+                    },
+                })
+            );
+            res.json({
+                ok: true,
+                post,
+                isWondering,
+            });
+        }
     );
-    res.json({
-        ok: true,
-        post,
-        isWondering,
-    });
 }
 
 export default withApiSession(

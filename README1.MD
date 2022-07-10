@@ -252,7 +252,8 @@ const Bs = dynamic(() => import("@components/bs"), { ssr: false });
 
 # 19.3 Lazy-load Imports (08:44)
 
-dynamic 으로 컴포넌트를 호출 할 때 화면에서 컴포넌트를 다 불어 올 때까지 로딩 워드를 표시 해 줄 수 있다.
+## dynamic 으로 컴포넌트를 호출 할 때 화면에서 컴포넌트를 다 불어 올 때까지 로딩 워드를 표시 해 줄 수 있다.
+## 이 부분은 개발 후반부에 정의 하는 게 좋다.
 
 ```tsx
 import { Suspense, useEffect, useState } from "react";
@@ -274,6 +275,14 @@ Default Changelist
 
 
 # 19.4 _document and Fonts (12:14)
+
+## 도큐먼트 컴포넌트는 서버에서 실행이 되고  NextJS 앱의 Html 뼈대를 짜주는 역할
+## 앱 컴포넌트는 클라이언트에서 실행이 된다
+
+## Next JS 빌드시 ( npm run build)
+## 유저가 더 이상 파일을 다 다운로드 받을 필요가 없다.
+## 폰트가 어디 있는지 알려주는 파일을 더 이상 다운로드 할 필요 없이 빌드 할때 .next 폴더에 미리 다운로드 해 놓는다.
+
 
 # 19.5 Script Component (09:16)
 
