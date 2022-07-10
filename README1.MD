@@ -252,6 +252,27 @@ const Bs = dynamic(() => import("@components/bs"), { ssr: false });
 
 # 19.3 Lazy-load Imports (08:44)
 
+dynamic 으로 컴포넌트를 호출 할 때 화면에서 컴포넌트를 다 불어 올 때까지 로딩 워드를 표시 해 줄 수 있다.
+
+```tsx
+import { Suspense, useEffect, useState } from "react";
+
+const Bs = dynamic(
+        () =>
+                new Promise((resolve) =>
+                        setTimeout(() => resolve(import("@components/bs")), 10000)
+                ),
+        { ssr: false, suspense: true, loading: () => <span>loading</span> }
+);
+
+Default Changelist
+        
+  <Suspense fallback={<button>loading!!</button>}>   // ----> 로딩 문구
+      <Bs />
+  </Suspense>
+```
+
+
 # 19.4 _document and Fonts (12:14)
 
 # 19.5 Script Component (09:16)
