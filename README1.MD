@@ -276,7 +276,8 @@ Default Changelist
 
 # 19.4 _document and Fonts (12:14)
 
-## 도큐먼트 컴포넌트는 서버에서 실행이 되고  NextJS 앱의 Html 뼈대를 짜주는 역할
+## 다큐먼트 컴포넌트는 한번만 랜더링 된다.
+## 다큐먼트 컴포넌트는 서버에서 실행이 되고  NextJS 앱의 Html 뼈대를 짜주는 역할
 ## 앱 컴포넌트는 클라이언트에서 실행이 된다
 
 ## Next JS 빌드시 ( npm run build)
@@ -285,6 +286,16 @@ Default Changelist
 
 
 # 19.5 Script Component (09:16)
+
+
+## 외부 스크립트나 SDK ( 카카오 SDK, Facebook sdk )를 사용할 때 유용
+## 페이지 로딩이 끝난 후 외부 스크립트를 불러와도 된다.
+## 그래서 초반 로딩 할 때 불러오는 것이 아닌 페이지 상호 작용이 끝나고
+## lazy load 한다.
+## 다른 거 다 불러 오고 나서 스크립트를 불러 와도 된다.
+## stratety 옵션으로 시점 설정 가능
+
+![img_21.png](img_21.png)
 
 # 19.6 getServerSideProps (09:14)
 
