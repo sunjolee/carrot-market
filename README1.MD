@@ -242,6 +242,14 @@ toggleFav({});
 ## 하지만 Dynamic Imports 를 사용하면 액션이 일어 났을 때 해당 컴포넌트를 읽어 낸다.
 ## Lazy Loading
 
+```tsx
+import dynamic from "next/dynamic";
+// import Bs from "@components/bs";
+
+const Bs = dynamic(() => import("@components/bs"), { ssr: false });
+
+```
+
 # 19.3 Lazy-load Imports (08:44)
 
 # 19.4 _document and Fonts (12:14)
