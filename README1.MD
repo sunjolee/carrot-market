@@ -299,6 +299,9 @@ Default Changelist
 
 # 19.6 getServerSideProps (09:14)
 
+## 페이지에 접속 하자 마자 바로 조회 되길 원 할 때..
+## 서버에서 데이터를 불러오면 새로고침 기능을 쓸 수 없다. SWR 기능을 안 쓰기에...
+
 # 19.7 SSR + SWR (11:47)
 
 # 19.8 SSR + Authentication (09:49)
