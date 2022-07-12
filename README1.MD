@@ -336,7 +336,11 @@ npm i unified remark-parse remark-html
 
 # 19.14 Inner HTML (09:41)
 
+
+![img_22.png](img_22.png)
+
 # 19.15 Recap (08:21)
+
 # 20 INCREMENTAL SITE REGENERATION
 
 # 20.0 Introduction (14:18)

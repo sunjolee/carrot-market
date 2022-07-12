@@ -7,6 +7,7 @@ async function handler(
     req: NextApiRequest,
     res: NextApiResponse<ResponseType>
 ) {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     if (req.method === "POST") {
         const {
             body: { question, latitude, longitude },
@@ -33,8 +34,8 @@ async function handler(
         const {
             query: { latitude, longitude },
         } = req;
-        const parsedLatitude = parseFloat(latitude!.toString());
-        const parsedLongitue = parseFloat(longitude!.toString());
+        const parsedLatitude = parseFloat(latitude.toString());
+        const parsedLongitue = parseFloat(longitude.toString());
         client.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(
             async () => {
                 const posts = await client.post.findMany({
