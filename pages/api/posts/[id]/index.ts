@@ -7,70 +7,76 @@ async function handler(
     req: NextApiRequest,
     res: NextApiResponse<ResponseType>
 ) {
-    const {
-        query: { id },
-        session: { user },
-    } = req;
-    client.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(
-        async () => {
-            const post = await client.post.findUnique({
-                where: {
-                    id: +id!,
-                },
-                include: {
-                    user: {
-                        select: {
-                            id: true,
-                            name: true,
-                            avatar: true,
-                        },
+    //  await new Promise((resolve) => setTimeout(resolve, 5000));
+    if (req.method === "POST") {
+        const {
+            body: { question, latitude, longitude },
+            session: { user },
+        } = req;
+        const post = await client.post.create({
+            data: {
+                question,
+                latitude,
+                longitude,
+                user: {
+                    connect: {
+                        id: user?.id,
                     },
-                    answers: {
-                        select: {
-                            answer: true,
-                            id: true,
-                            user: {
-                                select: {
-                                    id: true,
-                                    name: true,
-                                    avatar: true,
-                                },
+                },
+            },
+        });
+        res.json({
+            ok: true,
+            post,
+        });
+    }
+    if (req.method === "GET") {
+        const {
+            query: { latitude, longitude },
+        } = req;
+        const parsedLatitude = parseFloat(latitude.toString());
+        const parsedLongitue = parseFloat(longitude.toString());
+        client.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(
+            async () => {
+                const posts = await client.post.findMany({
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                name: true,
+                                avatar: true,
                             },
                         },
-                        take: 10,
-                        skip: 20,
-                    },
-                    _count: {
-                        select: {
-                            answers: true,
-                            wondering: true,
+                        _count: {
+                            select: {
+                                wondering: true,
+                                answers: true,
+                            },
                         },
                     },
-                },
-            });
-            const isWondering = Boolean(
-                await client.wondering.findFirst({
                     where: {
-                        postId: +id!,
-                        userId: user?.id,
+                        latitude: {
+                            gte: parsedLatitude - 0.01,
+                            lte: parsedLatitude + 0.01,
+                        },
+                        longitude: {
+                            gte: parsedLongitue - 0.01,
+                            lte: parsedLongitue + 0.01,
+                        },
                     },
-                    select: {
-                        id: true,
-                    },
-                })
-            );
-            res.json({
-                ok: true,
-                post,
-                isWondering,
-            });
-        }
-    );
+                });
+                res.json({
+                    ok: true,
+                    posts,
+                });
+            }
+        );
+    }
 }
 
 export default withApiSession(
     withHandler({
-        methods: ["GET"],
+        methods: ["GET", "POST"],
         handler,
     })
 );

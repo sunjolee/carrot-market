@@ -343,11 +343,22 @@ npm i unified remark-parse remark-html
 
 # 20 INCREMENTAL SITE REGENERATION
 
+
 # 20.0 Introduction (14:18)
 
 # 20.1 ISR part One (10:37)
 
+* nextjs 제공하는 기본적인 방법은 유저가 컴포넌트 초기 state들을 html로 볼 수 있지만 Data를 불러오는데 시간이 걸린다.
+* ssr 유저가 페이지와 데이터를 한번에 볼 수 있다
+* getStaticProps 블로그 페이지에서 사용한 방법,
+  장점 : 정적 HTML을 미리 생성해 주기 때문에 JS코드를 다운로드 받을 필요가 없어서 페이지를 빠르게 불러 온다.
+  단점 : 빌드 타임 때 한 번만 실행 된다. 이 때문에 페이지 안의 데이터를 변경하려면 페이지 전체를 다시 빌드해야 하는 단점
+  이럴 때 ISR 를 사용하면 된다.
+* ISR : 페이지 로딩 상태가 전혀 나타나지 않고 서버단에서 페이지를 렌더링 해 주지 않는다. 빌드시 실행이 되고 추후 몇초에 한번 재 생성이 가능하다.
+
+
 # 20.2 ISR part Two (12:55)
+
 
 # 20.3 On Demand Revalidation (11:53)
 
