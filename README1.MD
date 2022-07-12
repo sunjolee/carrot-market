@@ -327,9 +327,6 @@ md 파일 내용을 페이지에 보여 주기
 
 # 19.11 getStaticPaths part One (09:33)
 
-
-
-
 # 19.12 getStaticPaths part Two (07:41)
 
 # 19.13 Dynamic getStaticProps (08:28)
