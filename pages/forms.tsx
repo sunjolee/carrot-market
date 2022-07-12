@@ -28,7 +28,8 @@ export default function Forms() {
     };
     console.log(errors);
     return (
-        <form onSubmit={handleSubmit(onValid, onInvalid)}>
+        // <form onSubmit={handleSubmit(onValid, onInvalid)}>
+        <form  >
             <div className={"display:flex;"}>
                 <div>
                     <input

@@ -459,6 +459,15 @@ DB 스키마 변경 방법
 
 # 22.2 Vercel Deployment (11:34)
 
+nextjs 사용
+1. 풀스택 프레임워크 api route를 사용할 수 있다 , 미들웨어, 서버 컴포넌  
+2. 이미지 요청하는 시간을 최적화
+3. getStaticProps 사용
+4. ssg ( 정적 사이트 생성) - 프리스마를 사용하지 않고 md파일과 getStaticProps사용해 블로그를 만든다.
+
+## Vercel ?  
+www.vercel.com
+
 # 22.3 Vercel Deployment part Two (09:48)
 
 # 22.4 Preview Deployments (03:50)
