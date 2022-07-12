@@ -331,6 +331,9 @@ md 파일 내용을 페이지에 보여 주기
 
 # 19.13 Dynamic getStaticProps (08:28)
 
+npm i unified remark-parse remark-html
+
+
 # 19.14 Inner HTML (09:41)
 
 # 19.15 Recap (08:21)
