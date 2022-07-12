@@ -441,6 +441,22 @@ ReactJS에서 서버 컴포넌트를 사용하면 다른 컴포넌트 로딩이 
 
 # 22.1 Indexes and Deploys (12:54)
 
+DB 스키마 변경 방법
+1. https://app.planetscale.com/ 에서 신규 브랜치 생성
+2. 터미널에서 pscale connect carrot-market indexes - 접속
+3. schema.prisma 파일의 스키마 변경
+4. 터미널에서 npx prisma db push
+5. https://app.planetscale.com/ 에서 하단 create deploy request 버튼 클릭 
+
+6. ![img_23.png](img_23.png)
+
+
+7. deploy 버튼 클릭 하면 
+8. main 브랜치에서 스키마 적용 된 것 확인
+9. 
+    ![img_24.png](img_24.png)
+
+
 # 22.2 Vercel Deployment (11:34)
 
 # 22.3 Vercel Deployment part Two (09:48)
