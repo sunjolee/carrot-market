@@ -308,14 +308,27 @@ Default Changelist
 ## SWR 호출 시 에러 발생하면 최소 상단 홈과 하단 네비게이션은 보인다.
 
 
-
 # 19.8 SSR + Authentication (09:49)
+
+## 서버사이드 데이터 호출 + 인증 기능
 
 # 19.9 Blog Section (07:54)
 
+## FAQ 같은 정적 페이지 구현1
+
 # 19.10 getStaticProps (15:52)
 
+## getStaticProps 함수는 딱 한 번 실행
+## 페이지가 빌드되고 nextjs가 이 페이지를 export 한 후 일반 html로 될 때 실행
+
+npm install --save gray-matter
+
+md 파일 내용을 페이지에 보여 주기
+
 # 19.11 getStaticPaths part One (09:33)
+
+
+
 
 # 19.12 getStaticPaths part Two (07:41)
 
