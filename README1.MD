@@ -359,6 +359,9 @@ npm i unified remark-parse remark-html
 
 # 20.2 ISR part Two (12:55)
 
+await res.unstable_revalidate("/community");
+
+저장 후 위와 같이 해 주면 즉시 재조회 된다.
 
 # 20.3 On Demand Revalidation (11:53)
 
