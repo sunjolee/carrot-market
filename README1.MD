@@ -426,6 +426,15 @@ export const getStaticPaths: GetStaticPaths = () => {
 # 21.4 Parallelism (11:00)
 
 # 21.5 Recap (03:36)
+
+기다릴 필요 없이 서버사이드에서 컴포넌트를 렌더링 할 수 있다
+ReactJS에서 서버 컴포넌트를 사용하면 다른 컴포넌트 로딩이 끝나기 전에 페이지 렌더링 할 수 있다
+
+서버 컴포넌트를 만들고 싶으로면 파일 이름을 xx.server.tsx --> 이렇게 하면 클라이언트가 작동하는데 리소스가 많이 줄어 든다.
+클라이언트에서만 렌더링 되도록 만들고 싶으면 xx.client.tsx
+범용적으로 사용하고 싶으면 xx.tsx
+
+
 # 22 DEPLOYING
 
 # 22.0 Database Branches (08:18)
