@@ -6,7 +6,8 @@
 pscale auth login
 
 ### 1. db 접속
-pscale connect carrot-market
+pscale connect carrot-market ( master(main) 브랜치 )
+pscale connect carrot-market indexes ( indexes 브랜치에 접속 )
 
 ### 2. 사이트 재실행 - 가장 최신 버젼의 클라이언트를 실행 한다.
 npm run dev
@@ -19,6 +20,7 @@ npx prisma studio
 
 ### 모델 변경 정보 DB에 반영 ( 반영 후 클라이언트는 변경 정보가 안 따라주는데....결국 intellij를 다시 시작 하면 됨)
 npx prisma db push
+
 
 ### 1.0 왜? 소스에서 추가 된 모델 정보가 자동으로 안 보이지??
 ### 1.1 그냥 인텔리 제이를 다시 열자... 다른 방법이 있나? 
