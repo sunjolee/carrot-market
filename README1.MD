@@ -363,6 +363,19 @@ npm i unified remark-parse remark-html
 await res.unstable_revalidate("/community");
 
 저장 후 위와 같이 해 주면 즉시 재조회 된다.
+--> 실행 해 봤는데 에러 발생
+
+Error: "unstable_revalidate" has been renamed to "revalidate" see more info here: https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#on-demand-revalidation
+at ServerResponse.apiRes.unstable_revalidate (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/api-utils/node.js:170:19)
+at handler (webpack-internal:///(api)/./pages/api/posts/index.ts:30:19)
+at async eval (webpack-internal:///(api)/./libs/server/withHandler.ts:17:13)
+at async Object.apiResolver (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/api-utils/node.js:179:9)
+at async DevServer.runApi (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/next-server.js:381:9)
+at async Object.fn (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/base-server.js:497:37)
+at async Router.execute (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/router.js:213:36)
+at async DevServer.run (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/base-server.js:616:29)
+at async DevServer.run (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/dev/next-dev-server.js:532:20)
+at async DevServer.handleRequest (/Users/sunjo/react/nomad/carrot-market/node_modules/next/dist/server/base-server.js:317:20)
 
 
 
