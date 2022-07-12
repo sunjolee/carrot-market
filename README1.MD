@@ -383,10 +383,37 @@ at async DevServer.handleRequest (/Users/sunjo/react/nomad/carrot-market/node_mo
 
 # 20.5 Fallback (14:22)
 
+첫 번째 유저가 페이지 진입시 HTML 페이지를 만들고 그 다음에 들어오는 사람부터는 더 이상 다시 페이지를 만들지 않는다.
+
+
+
 # 20.6 Recap (05:33)
 
-# 20.7 Code Challenge (01:09)
-# 21 FUTURE: REACT 18
+미니 복습
+## ISR (Incremental Static Regeneration :  증분 정적 재생성) 과 fallback의 내용
+
+---
+getStaticProps는 최초 한번만  ( 프로젝트 빌드 할 때 페이지들이 html로 추출되는 때)
+revalidate: 120, 사용하면 페이지가 최신인지 아닌지 판단하여
+최신이면 만들어진 html를 보여주고
+아니라면 유저는 오래된 html를 보지만 백앤드에서는 페이지 재생성 작업이 실행 된다.
+ --> 유저들이 페이지 로딩 과정 없이 바로 볼수 있도록 한다.
+---
+await res.unstable_revalidate("/community");
+ --> 다른 페이지의 revalidation을 수동으로 진행할 수도 있다. ( 저장 후 즉 시 재 조회 처리 )
+---
+동적인 페이지들도 blog/id revalidation 가능
+fallback 덕분에 우리가 프로젝트를 빌드할 때 미리 페이지의 html을 
+fallback: true, fallback: blocking 을 사용하여 NextJS가 최초 요청시 그 페이지에 대한 html를 만들어 준다. 
+```typescript
+export const getStaticPaths: GetStaticPaths = () => {
+    return {
+        paths: [],
+        fallback: true,
+    };
+};
+```
+---
 
 # 21.0 Suspense (14:05)
 
